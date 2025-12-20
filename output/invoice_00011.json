@@ -1,0 +1,143 @@
+{
+    "image_name": "invoice_00011",
+    "检测项数": 21,
+    "detections": [
+        {
+            "class_name": "unit_price",
+            "confidence": 0.9704685807228088,
+            "extracted_text": [
+                "66.37"
+            ]
+        },
+        {
+            "class_name": "quantity",
+            "confidence": 0.9684831500053406,
+            "extracted_text": [
+                "1"
+            ]
+        },
+        {
+            "class_name": "unit",
+            "confidence": 0.9647398591041565,
+            "extracted_text": [
+                "袋"
+            ]
+        },
+        {
+            "class_name": "item_name",
+            "confidence": 0.9576066136360168,
+            "extracted_text": [
+                "服装:海澜之家男士保暖裤男秋冬蜂窝绒磨毛280g蚕丝护膝贴片薄款秋裤单裤衬裤",
+                "服装:海澜之家男士保暖裤男秋冬蜂窝绒磨毛280g蚕丝护膝贴片薄款秋裤单裤衬裤"
+            ]
+        },
+        {
+            "class_name": "tax_amount",
+            "confidence": 0.955226480960846,
+            "extracted_text": [
+                "8.63",
+                "-0.35",
+                "8.28"
+            ]
+        },
+        {
+            "class_name": "amount",
+            "confidence": 0.9533857703208923,
+            "extracted_text": [
+                "66.37",
+                "-2.65",
+                "63.72"
+            ]
+        },
+        {
+            "class_name": "tax_rate",
+            "confidence": 0.9467436671257019,
+            "extracted_text": [
+                "13%",
+                "13%"
+            ]
+        },
+        {
+            "class_name": "check_code",
+            "confidence": 0.9372358918190002,
+            "extracted_text": [
+                "72559850772030483733"
+            ]
+        },
+        {
+            "class_name": "specification",
+            "confidence": 0.9336562156677246,
+            "extracted_text": "男士保暖裤"
+        },
+        {
+            "class_name": "invoice_date",
+            "confidence": 0.9140228033065796,
+            "extracted_text": [
+                "2023年01月19日"
+            ]
+        },
+        {
+            "class_name": "seller_tax_id",
+            "confidence": 0.8633606433868408,
+            "extracted_text": [
+                "91370281MA3C2BW83D"
+            ]
+        },
+        {
+            "class_name": "total_amount",
+            "confidence": 0.8230068683624268,
+            "extracted_text": [
+                "72.00"
+            ]
+        },
+        {
+            "class_name": "seller_name",
+            "confidence": 0.8215614557266235,
+            "extracted_text": "青岛京东昌益得贸易有限公司"
+        },
+        {
+            "class_name": "seller_bank_account",
+            "confidence": 0.8071991205215454,
+            "extracted_text": "交通银行股份有限公司青岛崂山支行372005570018000008457"
+        },
+        {
+            "class_name": "invoice_number",
+            "confidence": 0.7580794095993042,
+            "extracted_text": [
+                "80618596"
+            ]
+        },
+        {
+            "class_name": "seller_address_phone",
+            "confidence": 0.7124742865562439,
+            "extracted_text": "山东省青岛市胶州市经济技术开发区渭河路17660900906"
+        },
+        {
+            "class_name": "invoice_code",
+            "confidence": 0.642865002155304,
+            "extracted_text": [
+                "037022200111"
+            ]
+        },
+        {
+            "class_name": "buyer_name",
+            "confidence": 0.6357718706130981,
+            "extracted_text": "个人"
+        },
+        {
+            "class_name": "buyer_tax_id",
+            "confidence": 0.5620267391204834,
+            "extracted_text": null
+        },
+        {
+            "class_name": "buyer_bank_account",
+            "confidence": 0.4807681441307068,
+            "extracted_text": ""
+        },
+        {
+            "class_name": "buyer_address_phone",
+            "confidence": 0.31764325499534607,
+            "extracted_text": ""
+        }
+    ]
+}

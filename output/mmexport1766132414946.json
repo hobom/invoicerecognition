@@ -1,0 +1,99 @@
+{
+    "image_name": "mmexport1766132414946",
+    "检测项数": 13,
+    "detections": [
+        {
+            "class_name": "item_name",
+            "confidence": 0.9618672728538513,
+            "extracted_text": [
+                "运输服务:客运服务费",
+                "运输服务:客运服务费"
+            ]
+        },
+        {
+            "class_name": "tax_rate",
+            "confidence": 0.9369849562644958,
+            "extracted_text": [
+                "1%",
+                "1%"
+            ]
+        },
+        {
+            "class_name": "unit_price",
+            "confidence": 0.9079474210739136,
+            "extracted_text": [
+                "13.2376237623762"
+            ]
+        },
+        {
+            "class_name": "seller_name",
+            "confidence": 0.8556138873100281,
+            "extracted_text": "四川蓝州出行科技有限公司青岛分公司"
+        },
+        {
+            "class_name": "amount",
+            "confidence": 0.8514044284820557,
+            "extracted_text": [
+                "13.24",
+                "-3.94",
+                "9.30"
+            ]
+        },
+        {
+            "class_name": "buyer_name",
+            "confidence": 0.8397098183631897,
+            "extracted_text": "青岛檬豆网络科技有限公司"
+        },
+        {
+            "class_name": "buyer_tax_id",
+            "confidence": 0.8128507733345032,
+            "extracted_text": [
+                "91370212MA3ER1RQXE"
+            ]
+        },
+        {
+            "class_name": "seller_tax_id",
+            "confidence": 0.7805799245834351,
+            "extracted_text": [
+                "91370203MADAA2QF84"
+            ]
+        },
+        {
+            "class_name": "invoice_number",
+            "confidence": 0.7316858768463135,
+            "extracted_text": [
+                "25922000000061174147"
+            ]
+        },
+        {
+            "class_name": "invoice_date",
+            "confidence": 0.7125157117843628,
+            "extracted_text": [
+                "2025年09月29日"
+            ]
+        },
+        {
+            "class_name": "quantity",
+            "confidence": 0.7085102796554565,
+            "extracted_text": [
+                "1"
+            ]
+        },
+        {
+            "class_name": "tax_amount",
+            "confidence": 0.6975559592247009,
+            "extracted_text": [
+                "0.13",
+                "-0.04",
+                "0.09"
+            ]
+        },
+        {
+            "class_name": "total_amount",
+            "confidence": 0.6247600317001343,
+            "extracted_text": [
+                "9.39"
+            ]
+        }
+    ]
+}

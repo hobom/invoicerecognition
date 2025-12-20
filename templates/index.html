@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>发票识别系统</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>📄 发票识别系统</h1>
+        
+        <form id="uploadForm">
+            <div class="upload-area" id="uploadArea">
+                <p>📁 点击或拖拽文件/文件夹到此处上传</p>
+                <p style="color: #666; font-size: 14px; margin-top: 10px;">支持 PNG, JPG, JPEG, GIF, BMP 格式</p>
+                <input type="file" id="fileInput" name="file" accept="image/*" multiple>
+                <input type="file" id="folderInput" name="folder" webkitdirectory directory multiple style="display: none;">
+                <div style="margin-top: 15px;">
+                    <button type="button" class="upload-btn" onclick="document.getElementById('fileInput').click()">
+                        选择文件
+                    </button>
+                    <button type="button" class="upload-btn" onclick="document.getElementById('folderInput').click()" style="margin-left: 10px;">
+                        选择文件夹
+                    </button>
+                </div>
+                <p id="fileName" style="margin-top: 10px; color: #666;"></p>
+                <div id="fileList" style="margin-top: 10px; max-height: 200px; overflow-y: auto; text-align: left;"></div>
+            </div>
+            
+            <div class="options">
+                <label>
+                    <input type="checkbox" name="save_json" checked> 保存 JSON 文件
+                </label>
+                <label>
+                    <input type="checkbox" name="save_db" checked> 保存到数据库
+                </label>
+            </div>
+            
+            <button type="submit" class="submit-btn" id="submitBtn">开始识别</button>
+        </form>
+        
+        <div class="loading" id="loading">
+            <div class="spinner"></div>
+            <p style="margin-top: 10px;">正在处理中，请稍候...</p>
+        </div>
+        
+        <div class="progress" id="progress">
+            <p>处理进度: <span id="progressText">0%</span></p>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill" style="width: 0%;">0%</div>
+            </div>
+        </div>
+        
+        <div class="error" id="error"></div>
+        
+        <div class="result" id="result">
+            <h2>识别结果</h2>
+            <div id="resultContent"></div>
+        </div>
+    </div>
+    
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
