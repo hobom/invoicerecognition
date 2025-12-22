@@ -1,0 +1,109 @@
+{
+    "image_name": "invoice_invoice_00077",
+    "检测项数": 16,
+    "detections": [
+        {
+            "class_name": "item_name",
+            "confidence": 0.9551114439964294,
+            "extracted_text": [
+                "预付卡销售:充值款",
+                "预付卡销售:充值款",
+                "预付卡销售:充值款",
+                "预付卡销售:充值款"
+            ]
+        },
+        {
+            "class_name": "amount",
+            "confidence": 0.8793465495109558,
+            "extracted_text": [
+                "50.00",
+                "50.00",
+                "50.00",
+                "100.00",
+                "250.00"
+            ]
+        },
+        {
+            "class_name": "unit",
+            "confidence": 0.842405378818512,
+            "extracted_text": null
+        },
+        {
+            "class_name": "buyer_name",
+            "confidence": 0.8354921936988831,
+            "extracted_text": "青岛檬豆网络科技有限公司"
+        },
+        {
+            "class_name": "seller_name",
+            "confidence": 0.8209458589553833,
+            "extracted_text": "青岛市琴岛通卡股份有限公司"
+        },
+        {
+            "class_name": "seller_tax_id",
+            "confidence": 0.8109501600265503,
+            "extracted_text": [
+                "91370200693791887J"
+            ]
+        },
+        {
+            "class_name": "tax_rate",
+            "confidence": 0.7950822114944458,
+            "extracted_text": null
+        },
+        {
+            "class_name": "invoice_number",
+            "confidence": 0.7826472520828247,
+            "extracted_text": [
+                "25927000000151414144"
+            ]
+        },
+        {
+            "class_name": "specification",
+            "confidence": 0.7761263251304626,
+            "extracted_text": ""
+        },
+        {
+            "class_name": "quantity",
+            "confidence": 0.771562397480011,
+            "extracted_text": null
+        },
+        {
+            "class_name": "buyer_tax_id",
+            "confidence": 0.7637209892272949,
+            "extracted_text": [
+                "91370212MA3ER1RQXE"
+            ]
+        },
+        {
+            "class_name": "total_amount",
+            "confidence": 0.6678518652915955,
+            "extracted_text": [
+                "250.00"
+            ]
+        },
+        {
+            "class_name": "invoice_date",
+            "confidence": 0.6640139818191528,
+            "extracted_text": [
+                "2025年09月30日"
+            ]
+        },
+        {
+            "class_name": "tax_amount",
+            "confidence": 0.5744131803512573,
+            "extracted_text": [
+                "0.00"
+            ]
+        },
+        {
+            "class_name": "unit_price",
+            "confidence": 0.30578821897506714,
+            "extracted_text": null
+        },
+        {
+            "class_name": "quantity",
+            "confidence": 0.2798914313316345,
+            "extracted_text": null
+        }
+    ]
+}

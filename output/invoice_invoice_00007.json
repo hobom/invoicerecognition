@@ -1,0 +1,136 @@
+{
+    "image_name": "invoice_invoice_00007",
+    "检测项数": 21,
+    "detections": [
+        {
+            "class_name": "quantity",
+            "confidence": 0.9723519682884216,
+            "extracted_text": [
+                "1"
+            ]
+        },
+        {
+            "class_name": "unit_price",
+            "confidence": 0.9701687693595886,
+            "extracted_text": [
+                "29.90"
+            ]
+        },
+        {
+            "class_name": "unit",
+            "confidence": 0.9640939831733704,
+            "extracted_text": [
+                "平装"
+            ]
+        },
+        {
+            "class_name": "tax_amount",
+            "confidence": 0.9633108377456665,
+            "extracted_text": null
+        },
+        {
+            "class_name": "item_name",
+            "confidence": 0.9620497226715088,
+            "extracted_text": [
+                "印刷品:【包邮】肖秀荣2023考研政治冲刺8套卷(预计22年11月上中旬上市发售）可搭徐涛核心考案腿",
+                "印刷品:【包邮】肖秀荣2023考研政治冲刺8套卷(预计22年11月上中旬上市发售）可搭徐涛核心考案腿"
+            ]
+        },
+        {
+            "class_name": "amount",
+            "confidence": 0.9567480683326721,
+            "extracted_text": [
+                "29.90",
+                "-2.00",
+                "27.90"
+            ]
+        },
+        {
+            "class_name": "check_code",
+            "confidence": 0.9515419006347656,
+            "extracted_text": [
+                "56100226553552785288"
+            ]
+        },
+        {
+            "class_name": "tax_rate",
+            "confidence": 0.9402772188186646,
+            "extracted_text": null
+        },
+        {
+            "class_name": "specification",
+            "confidence": 0.9213190674781799,
+            "extracted_text": "无"
+        },
+        {
+            "class_name": "invoice_date",
+            "confidence": 0.9124683141708374,
+            "extracted_text": [
+                "2022年11月11日"
+            ]
+        },
+        {
+            "class_name": "seller_tax_id",
+            "confidence": 0.8862826824188232,
+            "extracted_text": [
+                "91110302562134916R"
+            ]
+        },
+        {
+            "class_name": "seller_name",
+            "confidence": 0.8243986964225769,
+            "extracted_text": "北京京东世纪信息技术有限公司"
+        },
+        {
+            "class_name": "total_amount",
+            "confidence": 0.8205394148826599,
+            "extracted_text": [
+                "27.90"
+            ]
+        },
+        {
+            "class_name": "seller_bank_account",
+            "confidence": 0.7719677686691284,
+            "extracted_text": "招商银行股份有限公司北京青年路支行110907597010206"
+        },
+        {
+            "class_name": "invoice_number",
+            "confidence": 0.7657821774482727,
+            "extracted_text": [
+                "03070893"
+            ]
+        },
+        {
+            "class_name": "seller_address_phone",
+            "confidence": 0.693263053894043,
+            "extracted_text": "北京市北京经济技术开发区科创十一街18号院C座2层215室62648622"
+        },
+        {
+            "class_name": "invoice_code",
+            "confidence": 0.6379526853561401,
+            "extracted_text": [
+                "011002200611"
+            ]
+        },
+        {
+            "class_name": "buyer_name",
+            "confidence": 0.631008505821228,
+            "extracted_text": "个人"
+        },
+        {
+            "class_name": "buyer_tax_id",
+            "confidence": 0.5428071618080139,
+            "extracted_text": null
+        },
+        {
+            "class_name": "buyer_bank_account",
+            "confidence": 0.41533252596855164,
+            "extracted_text": ""
+        },
+        {
+            "class_name": "buyer_address_phone",
+            "confidence": 0.2988503575325012,
+            "extracted_text": ""
+        }
+    ]
+}

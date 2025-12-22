@@ -1,0 +1,99 @@
+{
+    "image_name": "invoice_invoice_00031",
+    "检测项数": 13,
+    "detections": [
+        {
+            "class_name": "item_name",
+            "confidence": 0.9667851328849792,
+            "extracted_text": [
+                "运输服务:客运服务费",
+                "运输服务:客运服务费"
+            ]
+        },
+        {
+            "class_name": "amount",
+            "confidence": 0.9132344126701355,
+            "extracted_text": [
+                "300.10",
+                "-56.75",
+                "243.35"
+            ]
+        },
+        {
+            "class_name": "tax_rate",
+            "confidence": 0.9086382985115051,
+            "extracted_text": [
+                "3%",
+                "3%"
+            ]
+        },
+        {
+            "class_name": "buyer_name",
+            "confidence": 0.8808026909828186,
+            "extracted_text": "青岛檬豆网络科技有限公司"
+        },
+        {
+            "class_name": "unit_price",
+            "confidence": 0.8663921356201172,
+            "extracted_text": [
+                "300.10"
+            ]
+        },
+        {
+            "class_name": "quantity",
+            "confidence": 0.8451616764068604,
+            "extracted_text": [
+                "1"
+            ]
+        },
+        {
+            "class_name": "total_amount",
+            "confidence": 0.8357963562011719,
+            "extracted_text": [
+                "250.65"
+            ]
+        },
+        {
+            "class_name": "tax_amount",
+            "confidence": 0.7960299849510193,
+            "extracted_text": [
+                "9.00",
+                "-1.70",
+                "7.30"
+            ]
+        },
+        {
+            "class_name": "buyer_tax_id",
+            "confidence": 0.7897307276725769,
+            "extracted_text": [
+                "91370212MA3ER1RQXE"
+            ]
+        },
+        {
+            "class_name": "seller_name",
+            "confidence": 0.7765438556671143,
+            "extracted_text": "滴滴出行科技有限公司"
+        },
+        {
+            "class_name": "invoice_date",
+            "confidence": 0.7309531569480896,
+            "extracted_text": [
+                "2025年03月25日"
+            ]
+        },
+        {
+            "class_name": "invoice_number",
+            "confidence": 0.6998797655105591,
+            "extracted_text": [
+                "25127000000084847036"
+            ]
+        },
+        {
+            "class_name": "seller_tax_id",
+            "confidence": 0.6036181449890137,
+            "extracted_text": [
+                "911201163409833307"
+            ]
+        }
+    ]
+}

@@ -28,6 +28,7 @@ class Detection(Base):
     id = Column(Integer, primary_key=True, autoincrement=True)
     invoice_id = Column(Integer, ForeignKey('invoices.id'), nullable=False, comment='发票ID')
     class_name = Column(String(100), nullable=False, comment='类别名称')
+    class_name_cn = Column(String(100), nullable=True, comment='类别名称（中文）')
     confidence = Column(Float, nullable=False, comment='置信度')
     extracted_text = Column(JSON, nullable=False, comment='提取的文本（字符串或字符串数组）')
     created_at = Column(DateTime, default=datetime.now, comment='创建时间')
@@ -36,5 +37,5 @@ class Detection(Base):
     invoice = relationship('Invoice', back_populates='detections')
     
     def __repr__(self):
-        return f"<Detection(id={self.id}, class_name='{self.class_name}', confidence={self.confidence})>"
+        return f"<Detection(id={self.id}, class_name='{self.class_name}', class_name_cn='{self.class_name_cn}', confidence={self.confidence})>"
 

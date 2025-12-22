@@ -1,0 +1,137 @@
+{
+    "image_name": "invoice_invoice_00009",
+    "检测项数": 21,
+    "detections": [
+        {
+            "class_name": "unit_price",
+            "confidence": 0.9802999496459961,
+            "extracted_text": [
+                "14.46601942"
+            ]
+        },
+        {
+            "class_name": "unit",
+            "confidence": 0.9724434018135071,
+            "extracted_text": [
+                "盒"
+            ]
+        },
+        {
+            "class_name": "item_name",
+            "confidence": 0.9706847667694092,
+            "extracted_text": [
+                "化学药品制剂:感冒灵颗粒"
+            ]
+        },
+        {
+            "class_name": "tax_amount",
+            "confidence": 0.964677095413208,
+            "extracted_text": [
+                "0.43",
+                "0.43"
+            ]
+        },
+        {
+            "class_name": "amount",
+            "confidence": 0.9516410231590271,
+            "extracted_text": [
+                "14.47",
+                "14.47"
+            ]
+        },
+        {
+            "class_name": "specification",
+            "confidence": 0.9406404495239258,
+            "extracted_text": "感冒灵颗粒"
+        },
+        {
+            "class_name": "check_code",
+            "confidence": 0.936342716217041,
+            "extracted_text": null
+        },
+        {
+            "class_name": "tax_rate",
+            "confidence": 0.914248526096344,
+            "extracted_text": [
+                "3%"
+            ]
+        },
+        {
+            "class_name": "invoice_date",
+            "confidence": 0.8767098784446716,
+            "extracted_text": [
+                "2022年12月24日"
+            ]
+        },
+        {
+            "class_name": "seller_tax_id",
+            "confidence": 0.8597351908683777,
+            "extracted_text": [
+                "91370125MA3RXLJD1Y"
+            ]
+        },
+        {
+            "class_name": "total_amount",
+            "confidence": 0.8068891763687134,
+            "extracted_text": [
+                "14.90"
+            ]
+        },
+        {
+            "class_name": "invoice_number",
+            "confidence": 0.784308671951294,
+            "extracted_text": [
+                "46314515"
+            ]
+        },
+        {
+            "class_name": "seller_name",
+            "confidence": 0.7759903073310852,
+            "extracted_text": "京东大药房连锁（山东）有限公司"
+        },
+        {
+            "class_name": "seller_bank_account",
+            "confidence": 0.7273334264755249,
+            "extracted_text": "中国银行股份有限公司济阳支行209141746261"
+        },
+        {
+            "class_name": "quantity",
+            "confidence": 0.7153416872024536,
+            "extracted_text": [
+                "1"
+            ]
+        },
+        {
+            "class_name": "buyer_name",
+            "confidence": 0.6815989017486572,
+            "extracted_text": "个人"
+        },
+        {
+            "class_name": "seller_address_phone",
+            "confidence": 0.6761144995689392,
+            "extracted_text": " 山东省济南市市中区经七路28-1号山东数字产业大厦19楼1901、190319050531-85929212"
+        },
+        {
+            "class_name": "invoice_code",
+            "confidence": 0.6752256751060486,
+            "extracted_text": [
+                "037002200211"
+            ]
+        },
+        {
+            "class_name": "buyer_bank_account",
+            "confidence": 0.6073787212371826,
+            "extracted_text": ""
+        },
+        {
+            "class_name": "buyer_tax_id",
+            "confidence": 0.5637412667274475,
+            "extracted_text": null
+        },
+        {
+            "class_name": "buyer_address_phone",
+            "confidence": 0.31755438446998596,
+            "extracted_text": ""
+        }
+    ]
+}

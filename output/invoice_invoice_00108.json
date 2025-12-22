@@ -1,0 +1,107 @@
+{
+    "image_name": "invoice_invoice_00108",
+    "检测项数": 15,
+    "detections": [
+        {
+            "class_name": "item_name",
+            "confidence": 0.9729137420654297,
+            "extracted_text": [
+                "住宿服务:住宿费"
+            ]
+        },
+        {
+            "class_name": "unit",
+            "confidence": 0.9465779662132263,
+            "extracted_text": [
+                "晚"
+            ]
+        },
+        {
+            "class_name": "unit_price",
+            "confidence": 0.9387171268463135,
+            "extracted_text": [
+                "283.0188679245283"
+            ]
+        },
+        {
+            "class_name": "tax_rate",
+            "confidence": 0.8915947079658508,
+            "extracted_text": [
+                "6%"
+            ]
+        },
+        {
+            "class_name": "quantity",
+            "confidence": 0.8876493573188782,
+            "extracted_text": [
+                "1"
+            ]
+        },
+        {
+            "class_name": "seller_name",
+            "confidence": 0.8390129208564758,
+            "extracted_text": "湖南漫星酒店管理有限公司"
+        },
+        {
+            "class_name": "buyer_name",
+            "confidence": 0.8334322571754456,
+            "extracted_text": "青岛檬豆网络科技有限公司"
+        },
+        {
+            "class_name": "seller_tax_id",
+            "confidence": 0.8125442266464233,
+            "extracted_text": [
+                "91430100MA4Q1UPC2R"
+            ]
+        },
+        {
+            "class_name": "invoice_number",
+            "confidence": 0.8123986721038818,
+            "extracted_text": [
+                "25432000000149767267"
+            ]
+        },
+        {
+            "class_name": "specification",
+            "confidence": 0.8063762784004211,
+            "extracted_text": "计"
+        },
+        {
+            "class_name": "total_amount",
+            "confidence": 0.7223315238952637,
+            "extracted_text": [
+                "300.00"
+            ]
+        },
+        {
+            "class_name": "buyer_tax_id",
+            "confidence": 0.706444263458252,
+            "extracted_text": [
+                "91370212MA3ER1RQXE"
+            ]
+        },
+        {
+            "class_name": "amount",
+            "confidence": 0.6916832327842712,
+            "extracted_text": [
+                "283.02",
+                "283.02"
+            ]
+        },
+        {
+            "class_name": "invoice_date",
+            "confidence": 0.6881777048110962,
+            "extracted_text": [
+                "2025年11月05日"
+            ]
+        },
+        {
+            "class_name": "tax_amount",
+            "confidence": 0.5832571387290955,
+            "extracted_text": [
+                "16.98",
+                "16.98"
+            ]
+        }
+    ]
+}

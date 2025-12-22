@@ -19,6 +19,9 @@ def create_app():
     app.config.from_object(Config)
     Config.init_app(app)
     
+    # 设置debug模式
+    app.debug = app.config.get('DEBUG', False)
+    
     # 初始化发票识别服务
     invoice_service = InvoiceService(
         yolo_model=model_loader.yolo_model,
@@ -64,4 +67,16 @@ if __name__ == '__main__':
     # 应用启动时检查并初始化数据库
     check_and_init_db()
     
-    app.run(debug=True, host='0.0.0.0', port=5000)
+    # 从配置中获取debug设置
+    debug_mode = app.config.get('DEBUG', False)
+    
+    # 打印debug状态
+    if debug_mode:
+        print("🔧 Debug模式已开启")
+        print("   - 自动重载: 开启")
+        print("   - 详细错误信息: 开启")
+        print("   - 调试器: 开启")
+    else:
+        print("⚙️  Debug模式已关闭")
+    
+    app.run(debug=debug_mode, host='0.0.0.0', port=5000)

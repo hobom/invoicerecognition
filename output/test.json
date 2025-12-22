@@ -1,0 +1,102 @@
+{
+    "image_name": "test",
+    "检测项数": 14,
+    "detections": [
+        {
+            "class_name": "item_name",
+            "confidence": 0.9653894901275635,
+            "extracted_text": [
+                "其他软件服务:技术服务费"
+            ]
+        },
+        {
+            "class_name": "unit",
+            "confidence": 0.9535276293754578,
+            "extracted_text": [
+                "项"
+            ]
+        },
+        {
+            "class_name": "unit_price",
+            "confidence": 0.9284517765045166,
+            "extracted_text": [
+                "72091.7358490566"
+            ]
+        },
+        {
+            "class_name": "quantity",
+            "confidence": 0.8931635618209839,
+            "extracted_text": [
+                "1"
+            ]
+        },
+        {
+            "class_name": "tax_rate",
+            "confidence": 0.8766403198242188,
+            "extracted_text": [
+                "6%"
+            ]
+        },
+        {
+            "class_name": "amount",
+            "confidence": 0.8643222451210022,
+            "extracted_text": [
+                "72091.74",
+                "72091.74"
+            ]
+        },
+        {
+            "class_name": "buyer_name",
+            "confidence": 0.8239575624465942,
+            "extracted_text": "青岛檬豆网络科技有限公司"
+        },
+        {
+            "class_name": "seller_tax_id",
+            "confidence": 0.8219847679138184,
+            "extracted_text": [
+                "91370212MACTJBLH1W"
+            ]
+        },
+        {
+            "class_name": "seller_name",
+            "confidence": 0.7962446808815002,
+            "extracted_text": "戒尺 （山东）大数据科技有限公司"
+        },
+        {
+            "class_name": "invoice_number",
+            "confidence": 0.720526933670044,
+            "extracted_text": [
+                "25922000000077229939"
+            ]
+        },
+        {
+            "class_name": "buyer_tax_id",
+            "confidence": 0.7168329954147339,
+            "extracted_text": [
+                "91370212MA3ER1RQXE"
+            ]
+        },
+        {
+            "class_name": "total_amount",
+            "confidence": 0.7156231999397278,
+            "extracted_text": [
+                "76417.24"
+            ]
+        },
+        {
+            "class_name": "tax_amount",
+            "confidence": 0.6248881220817566,
+            "extracted_text": [
+                "4325.50",
+                "4325.50"
+            ]
+        },
+        {
+            "class_name": "invoice_date",
+            "confidence": 0.5793887972831726,
+            "extracted_text": [
+                "2025年12月01日"
+            ]
+        }
+    ]
+}

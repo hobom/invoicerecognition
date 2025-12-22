@@ -1,0 +1,141 @@
+{
+    "image_name": "invoice_invoice_00017",
+    "检测项数": 21,
+    "detections": [
+        {
+            "class_name": "quantity",
+            "confidence": 0.9703676700592041,
+            "extracted_text": [
+                "1"
+            ]
+        },
+        {
+            "class_name": "unit_price",
+            "confidence": 0.9679856300354004,
+            "extracted_text": [
+                "96.46"
+            ]
+        },
+        {
+            "class_name": "unit",
+            "confidence": 0.9651464223861694,
+            "extracted_text": [
+                "片"
+            ]
+        },
+        {
+            "class_name": "tax_amount",
+            "confidence": 0.9592067003250122,
+            "extracted_text": [
+                "12.54",
+                "-0.14",
+                "12.40"
+            ]
+        },
+        {
+            "class_name": "amount",
+            "confidence": 0.9524542093276978,
+            "extracted_text": [
+                "96.46",
+                "-1.06",
+                "95.40"
+            ]
+        },
+        {
+            "class_name": "item_name",
+            "confidence": 0.9486430883407593,
+            "extracted_text": [
+                "计算机外部设备:三星（SAMSUNG）128GBTF（MicroSD）内存卡U3V30A2读速200MB/S4K手机平板游",
+                "计算机外部设备:三星（SAMSUNG）128GBTF（MicroSD）内存卡U3V30A2读速200MB/S4K手机平板游"
+            ]
+        },
+        {
+            "class_name": "check_code",
+            "confidence": 0.9326674938201904,
+            "extracted_text": null
+        },
+        {
+            "class_name": "tax_rate",
+            "confidence": 0.9326028823852539,
+            "extracted_text": [
+                "13%",
+                "13%"
+            ]
+        },
+        {
+            "class_name": "specification",
+            "confidence": 0.9216296672821045,
+            "extracted_text": "MB-MY128SA WW"
+        },
+        {
+            "class_name": "invoice_date",
+            "confidence": 0.8964969515800476,
+            "extracted_text": [
+                "2024年01月27日"
+            ]
+        },
+        {
+            "class_name": "seller_tax_id",
+            "confidence": 0.8585929870605469,
+            "extracted_text": [
+                "91370281MA3C2BW83D"
+            ]
+        },
+        {
+            "class_name": "total_amount",
+            "confidence": 0.82314133644104,
+            "extracted_text": [
+                "107.80"
+            ]
+        },
+        {
+            "class_name": "seller_name",
+            "confidence": 0.8136648535728455,
+            "extracted_text": "青岛京东昌益得贸易有限公司"
+        },
+        {
+            "class_name": "seller_bank_account",
+            "confidence": 0.8103864192962646,
+            "extracted_text": "交通银行股份有限公司青岛崂山支行372005570018000008457"
+        },
+        {
+            "class_name": "invoice_number",
+            "confidence": 0.7837100028991699,
+            "extracted_text": [
+                "52690818"
+            ]
+        },
+        {
+            "class_name": "seller_address_phone",
+            "confidence": 0.7217761278152466,
+            "extracted_text": "山东省青岛市胶州市经济技术开发区渭河路17660900906"
+        },
+        {
+            "class_name": "invoice_code",
+            "confidence": 0.6631932258605957,
+            "extracted_text": [
+                "037022300211"
+            ]
+        },
+        {
+            "class_name": "buyer_name",
+            "confidence": 0.6187599897384644,
+            "extracted_text": "个人"
+        },
+        {
+            "class_name": "buyer_bank_account",
+            "confidence": 0.546926736831665,
+            "extracted_text": ""
+        },
+        {
+            "class_name": "buyer_tax_id",
+            "confidence": 0.49950456619262695,
+            "extracted_text": null
+        },
+        {
+            "class_name": "buyer_address_phone",
+            "confidence": 0.25767192244529724,
+            "extracted_text": ""
+        }
+    ]
+}

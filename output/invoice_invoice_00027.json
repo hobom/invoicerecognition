@@ -1,0 +1,103 @@
+{
+    "image_name": "invoice_invoice_00027",
+    "检测项数": 15,
+    "detections": [
+        {
+            "class_name": "item_name",
+            "confidence": 0.9604104161262512,
+            "extracted_text": [
+                "餐饮服务:餐费"
+            ]
+        },
+        {
+            "class_name": "tax_rate",
+            "confidence": 0.910393238067627,
+            "extracted_text": [
+                "6%"
+            ]
+        },
+        {
+            "class_name": "unit_price",
+            "confidence": 0.8969228267669678,
+            "extracted_text": [
+                "199.06"
+            ]
+        },
+        {
+            "class_name": "specification",
+            "confidence": 0.891906201839447,
+            "extracted_text": ""
+        },
+        {
+            "class_name": "unit",
+            "confidence": 0.8783926963806152,
+            "extracted_text": null
+        },
+        {
+            "class_name": "quantity",
+            "confidence": 0.8758547306060791,
+            "extracted_text": [
+                "1"
+            ]
+        },
+        {
+            "class_name": "amount",
+            "confidence": 0.8644860982894897,
+            "extracted_text": [
+                "199.06",
+                "199.06"
+            ]
+        },
+        {
+            "class_name": "seller_tax_id",
+            "confidence": 0.8545012474060059,
+            "extracted_text": [
+                "91370202MA3D7P2G4P"
+            ]
+        },
+        {
+            "class_name": "tax_amount",
+            "confidence": 0.801608145236969,
+            "extracted_text": [
+                "11.94",
+                "11.94"
+            ]
+        },
+        {
+            "class_name": "buyer_name",
+            "confidence": 0.7878368496894836,
+            "extracted_text": "兰晓仪"
+        },
+        {
+            "class_name": "seller_name",
+            "confidence": 0.7737408876419067,
+            "extracted_text": "海鸿达（北京）餐饮管理有限公司青岛第四分公司"
+        },
+        {
+            "class_name": "total_amount",
+            "confidence": 0.7523086071014404,
+            "extracted_text": [
+                "211"
+            ]
+        },
+        {
+            "class_name": "invoice_number",
+            "confidence": 0.7445905208587646,
+            "extracted_text": [
+                "24922000000079024959"
+            ]
+        },
+        {
+            "class_name": "invoice_date",
+            "confidence": 0.7054527997970581,
+            "extracted_text": [
+                "2024年12月30日"
+            ]
+        },
+        {
+            "class_name": "seller_tax_id",
+            "confidence": 0.6147452592849731,
+            "extracted_text": null
+        }
+    ]
+}

@@ -1,0 +1,108 @@
+{
+    "image_name": "invoice_invoice_00034",
+    "检测项数": 16,
+    "detections": [
+        {
+            "class_name": "item_name",
+            "confidence": 0.9556311964988708,
+            "extracted_text": [
+                "餐饮服务:餐饮服务"
+            ]
+        },
+        {
+            "class_name": "tax_rate",
+            "confidence": 0.8894893527030945,
+            "extracted_text": [
+                "1%"
+            ]
+        },
+        {
+            "class_name": "unit_price",
+            "confidence": 0.874599277973175,
+            "extracted_text": [
+                "248.51"
+            ]
+        },
+        {
+            "class_name": "quantity",
+            "confidence": 0.8678496479988098,
+            "extracted_text": [
+                "1"
+            ]
+        },
+        {
+            "class_name": "seller_name",
+            "confidence": 0.8518022298812866,
+            "extracted_text": "市南区笑小鲜餐饮店（个体工商户）"
+        },
+        {
+            "class_name": "amount",
+            "confidence": 0.8481636047363281,
+            "extracted_text": [
+                "248.51",
+                "248.51"
+            ]
+        },
+        {
+            "class_name": "specification",
+            "confidence": 0.84523606300354,
+            "extracted_text": ""
+        },
+        {
+            "class_name": "seller_tax_id",
+            "confidence": 0.8277251124382019,
+            "extracted_text": [
+                "92370202MAE0J7KY0B"
+            ]
+        },
+        {
+            "class_name": "unit",
+            "confidence": 0.8102149367332458,
+            "extracted_text": null
+        },
+        {
+            "class_name": "invoice_number",
+            "confidence": 0.7626338601112366,
+            "extracted_text": [
+                "25922000000031611486"
+            ]
+        },
+        {
+            "class_name": "total_amount",
+            "confidence": 0.7020774483680725,
+            "extracted_text": [
+                "251.00"
+            ]
+        },
+        {
+            "class_name": "buyer_name",
+            "confidence": 0.6847282648086548,
+            "extracted_text": "姜浩然"
+        },
+        {
+            "class_name": "invoice_date",
+            "confidence": 0.6383962035179138,
+            "extracted_text": [
+                "2025年05月29日"
+            ]
+        },
+        {
+            "class_name": "tax_amount",
+            "confidence": 0.5567603707313538,
+            "extracted_text": [
+                "2.49",
+                "2.49"
+            ]
+        },
+        {
+            "class_name": "seller_tax_id",
+            "confidence": 0.46650785207748413,
+            "extracted_text": null
+        },
+        {
+            "class_name": "buyer_tax_id",
+            "confidence": 0.2078656554222107,
+            "extracted_text": null
+        }
+    ]
+}

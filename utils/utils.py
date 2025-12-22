@@ -3,6 +3,64 @@ from db import SessionLocal
 from model import Invoice, Detection
 
 
+# 类别名称到中文名称的映射
+CLASS_NAME_CN_MAP = {
+    "quantity": "数量",
+    "unit_price": "单价",
+    "unit": "单位",
+    "item_name": "项目名称",
+    "check_code": "校验码",
+    "tax_amount": "税额",
+    "amount": "金额",
+    "tax_rate": "税率",
+    "specification": "规格型号",
+    "invoice_number": "发票号码",
+    "invoice_code": "发票代码",
+    "invoice_date": "开票日期",
+    "seller_name": "销售方名称",
+    "buyer_name": "购买方名称",
+    "seller_tax_id": "销售方纳税人识别号",
+    "buyer_tax_id": "购买方纳税人识别号",
+    "seller_bank_account": "销售方开户行及账号",
+    "buyer_bank_account": "购买方开户行及账号",
+    "seller_address_phone": "销售方地址、电话",
+    "buyer_address_phone": "购买方地址、电话",
+    "total_amount": "价税合计",
+}
+
+
+def get_class_name_cn(class_name):
+    """
+    获取类别名称的中文名称
+    
+    Args:
+        class_name: 类别名称（英文）
+        
+    Returns:
+        str: 类别名称的中文名称，如果不存在则返回原名称
+    """
+    return CLASS_NAME_CN_MAP.get(class_name, class_name)
+
+
+HEADER_KEYWORDS = {
+    # 单位相关
+    "unit": ["单", "位", "单位"],
+    # 规格相关
+    "specification": ["规", "格", "规格", "型", "号", "型号", "规格型号"],
+    # 数量相关
+    "quantity": ["数", "量", "数量"],
+    # 单价相关
+    "unit_price": ["单", "价", "单价"],
+    # 金额相关
+    "amount": ["金", "额", "金额"],
+    # 税率相关
+    "tax_rate": ["税", "率", "税率"],
+    # 税额相关
+    "tax_amount": ["税", "额", "税额"],
+    # 货物名称相关
+    "item_name": ["货", "物", "货物", "或", "应", "税", "劳", "务", "服务", "名称", "货物或应税劳务", "服务名称"],
+}
+
 def extract_values(text_list, class_name):
     """
     从文本中提取值
@@ -55,22 +113,19 @@ def extract_values(text_list, class_name):
                 result.append(match)
         return result
     elif class_name in ["seller_name", "buyer_name", "seller_bank_account", "buyer_bank_account", "seller_address_phone", "buyer_address_phone"]:
-        # 选择最后一个文本进行处理
-        if len(text_list[-1]) > 1:
-            text = text_list[-1]
-        elif len(text_list) > 1:
-            text = text_list[-2]
-        else:
-            text = text_list[-1] if text_list else ""
-        # 检查是否包含中文冒号或英文冒号
-        if "：" in text:
-            parts = text.split("：")
-            return parts[-1].strip() if len(parts) > 1 else text.strip()
-        elif ":" in text:
-            parts = text.split(":")
-            return parts[-1].strip() if len(parts) > 1 else text.strip()
-        else:
-            return text.strip()
+        res = []
+        find = False
+        for text in text_list:
+            if "：" in text or ":" in text:
+                parts = text.split("：") if "：" in text else text.split(":")
+                if len(parts) > 1:
+                    res.append(parts[-1].strip())
+                    find=True
+            elif find and len(text.strip()) > 1:  # 排除单个字符（包括单个汉字）
+                # 调试信息：确认条件满足
+                print(f"DEBUG: 添加文本 '{text.strip()}', 长度={len(text.strip())}")
+                res.append(text.strip())
+        return " ".join(res)
     elif class_name in ["unit_price", "tax_amount", "tax_rate", "amount", "quantity", "total_amount"]:
         # 使用正则表达式匹配连续的数字
         result = []
@@ -91,7 +146,11 @@ def extract_values(text_list, class_name):
                 return matches
         return None
     elif class_name in ["unit"]:
-        return [text.strip() for text in text_list[1:]]
+        res = []
+        for text in text_list[1:]:
+            if text.strip() not in HEADER_KEYWORDS["unit"]:
+                res.append(text.strip())
+        return res
     elif class_name in ["specification"]:
         return " ".join(text.strip() for text in text_list[1:])
     return None
@@ -180,9 +239,14 @@ def save_to_database(detection_info):
                 extracted_text = [extracted_text]  # 如果是字符串，转换为列表
             # 如果已经是列表，保持不变
             
+            # 获取类别名称的中文名称
+            class_name = detection_data['class_name']
+            class_name_cn = get_class_name_cn(class_name)
+            
             detection = Detection(
                 invoice_id=invoice.id,
-                class_name=detection_data['class_name'],
+                class_name=class_name,
+                class_name_cn=class_name_cn,
                 confidence=detection_data['confidence'],
                 extracted_text=extracted_text
             )

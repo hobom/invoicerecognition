@@ -1,0 +1,127 @@
+{
+    "image_name": "invoice_invoice_00006",
+    "检测项数": 21,
+    "detections": [
+        {
+            "class_name": "unit_price",
+            "confidence": 0.970276415348053,
+            "extracted_text": null
+        },
+        {
+            "class_name": "item_name",
+            "confidence": 0.9695838689804077,
+            "extracted_text": null
+        },
+        {
+            "class_name": "unit",
+            "confidence": 0.9680266380310059,
+            "extracted_text": null
+        },
+        {
+            "class_name": "quantity",
+            "confidence": 0.9665279388427734,
+            "extracted_text": null
+        },
+        {
+            "class_name": "tax_amount",
+            "confidence": 0.9664209485054016,
+            "extracted_text": [
+                "5.55",
+                "5.55"
+            ]
+        },
+        {
+            "class_name": "amount",
+            "confidence": 0.9570637345314026,
+            "extracted_text": [
+                "45.86",
+                "45.86"
+            ]
+        },
+        {
+            "class_name": "check_code",
+            "confidence": 0.9449148178100586,
+            "extracted_text": [
+                "79260595910165677221"
+            ]
+        },
+        {
+            "class_name": "tax_rate",
+            "confidence": 0.9337759613990784,
+            "extracted_text": null
+        },
+        {
+            "class_name": "specification",
+            "confidence": 0.9210889935493469,
+            "extracted_text": ""
+        },
+        {
+            "class_name": "invoice_date",
+            "confidence": 0.9022265076637268,
+            "extracted_text": [
+                "2022年09月09日"
+            ]
+        },
+        {
+            "class_name": "seller_tax_id",
+            "confidence": 0.8676645755767822,
+            "extracted_text": [
+                "91110302562134916R"
+            ]
+        },
+        {
+            "class_name": "total_amount",
+            "confidence": 0.8291341662406921,
+            "extracted_text": [
+                "51.41"
+            ]
+        },
+        {
+            "class_name": "seller_name",
+            "confidence": 0.8241413831710815,
+            "extracted_text": "北京京东世纪信息技术有限公司"
+        },
+        {
+            "class_name": "buyer_name",
+            "confidence": 0.7918202877044678,
+            "extracted_text": "个人"
+        },
+        {
+            "class_name": "invoice_number",
+            "confidence": 0.7610886693000793,
+            "extracted_text": null
+        },
+        {
+            "class_name": "seller_bank_account",
+            "confidence": 0.7180571556091309,
+            "extracted_text": "招商银行股份有限公司北京青年路支行110907597010206"
+        },
+        {
+            "class_name": "invoice_code",
+            "confidence": 0.6726956963539124,
+            "extracted_text": [
+                "011002200311"
+            ]
+        },
+        {
+            "class_name": "buyer_tax_id",
+            "confidence": 0.6210804581642151,
+            "extracted_text": null
+        },
+        {
+            "class_name": "buyer_bank_account",
+            "confidence": 0.6054031848907471,
+            "extracted_text": ""
+        },
+        {
+            "class_name": "seller_address_phone",
+            "confidence": 0.5897051095962524,
+            "extracted_text": "北京市北京经济技术开发区科创十一街18号院C座2层215室6248622"
+        },
+        {
+            "class_name": "buyer_address_phone",
+            "confidence": 0.3272092044353485,
+            "extracted_text": ""
+        }
+    ]
+}

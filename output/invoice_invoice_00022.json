@@ -1,0 +1,103 @@
+{
+    "image_name": "invoice_invoice_00022",
+    "检测项数": 15,
+    "detections": [
+        {
+            "class_name": "unit_price",
+            "confidence": 0.9756701588630676,
+            "extracted_text": [
+                "201.89"
+            ]
+        },
+        {
+            "class_name": "item_name",
+            "confidence": 0.969745397567749,
+            "extracted_text": [
+                "餐饮服务:餐费"
+            ]
+        },
+        {
+            "class_name": "unit",
+            "confidence": 0.9307898879051208,
+            "extracted_text": null
+        },
+        {
+            "class_name": "tax_rate",
+            "confidence": 0.9108958840370178,
+            "extracted_text": [
+                "6%"
+            ]
+        },
+        {
+            "class_name": "quantity",
+            "confidence": 0.9054315686225891,
+            "extracted_text": [
+                "1.000000"
+            ]
+        },
+        {
+            "class_name": "amount",
+            "confidence": 0.8728163242340088,
+            "extracted_text": [
+                "201.89",
+                "201.89"
+            ]
+        },
+        {
+            "class_name": "specification",
+            "confidence": 0.8582421541213989,
+            "extracted_text": ""
+        },
+        {
+            "class_name": "seller_tax_id",
+            "confidence": 0.822712779045105,
+            "extracted_text": [
+                "91370283MACQY48L1U"
+            ]
+        },
+        {
+            "class_name": "seller_name",
+            "confidence": 0.8112136125564575,
+            "extracted_text": "青岛惠郡餐饮管理有限公司"
+        },
+        {
+            "class_name": "invoice_number",
+            "confidence": 0.7783523201942444,
+            "extracted_text": [
+                "24922000000078112547"
+            ]
+        },
+        {
+            "class_name": "seller_tax_id",
+            "confidence": 0.7615815997123718,
+            "extracted_text": null
+        },
+        {
+            "class_name": "invoice_date",
+            "confidence": 0.6806875467300415,
+            "extracted_text": [
+                "2024年12月28日"
+            ]
+        },
+        {
+            "class_name": "tax_amount",
+            "confidence": 0.6566595435142517,
+            "extracted_text": [
+                "12.11",
+                "12.11"
+            ]
+        },
+        {
+            "class_name": "total_amount",
+            "confidence": 0.6143293976783752,
+            "extracted_text": [
+                "214.00"
+            ]
+        },
+        {
+            "class_name": "buyer_name",
+            "confidence": 0.25993889570236206,
+            "extracted_text": "姜浩然"
+        }
+    ]
+}

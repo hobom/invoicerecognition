@@ -1,0 +1,95 @@
+{
+    "image_name": "invoice_invoice_00073",
+    "检测项数": 13,
+    "detections": [
+        {
+            "class_name": "item_name",
+            "confidence": 0.9390597939491272,
+            "extracted_text": [
+                "运输服务:客运服务费"
+            ]
+        },
+        {
+            "class_name": "amount",
+            "confidence": 0.9361962080001831,
+            "extracted_text": [
+                "14.45",
+                "14.45"
+            ]
+        },
+        {
+            "class_name": "tax_rate",
+            "confidence": 0.8876549005508423,
+            "extracted_text": [
+                "3%"
+            ]
+        },
+        {
+            "class_name": "seller_name",
+            "confidence": 0.8765087127685547,
+            "extracted_text": "台州领行智享科技有限公司"
+        },
+        {
+            "class_name": "total_amount",
+            "confidence": 0.8659305572509766,
+            "extracted_text": [
+                "14.88"
+            ]
+        },
+        {
+            "class_name": "buyer_name",
+            "confidence": 0.8336800336837769,
+            "extracted_text": "青岛檬豆网络科技有限公司"
+        },
+        {
+            "class_name": "invoice_number",
+            "confidence": 0.8318672180175781,
+            "extracted_text": [
+                "25337000000466517971"
+            ]
+        },
+        {
+            "class_name": "unit_price",
+            "confidence": 0.8080236911773682,
+            "extracted_text": [
+                "14.45"
+            ]
+        },
+        {
+            "class_name": "seller_tax_id",
+            "confidence": 0.8045681118965149,
+            "extracted_text": [
+                "91331003MADBR4Y722"
+            ]
+        },
+        {
+            "class_name": "quantity",
+            "confidence": 0.787382960319519,
+            "extracted_text": [
+                "1"
+            ]
+        },
+        {
+            "class_name": "buyer_tax_id",
+            "confidence": 0.7791218757629395,
+            "extracted_text": [
+                "91370212MA3ER1RQXE"
+            ]
+        },
+        {
+            "class_name": "invoice_date",
+            "confidence": 0.7557342052459717,
+            "extracted_text": [
+                "2025年09月30日"
+            ]
+        },
+        {
+            "class_name": "tax_amount",
+            "confidence": 0.738136887550354,
+            "extracted_text": [
+                "0.43",
+                "0.43"
+            ]
+        }
+    ]
+}

@@ -1,0 +1,143 @@
+{
+    "image_name": "invoice_invoice_00002",
+    "检测项数": 21,
+    "detections": [
+        {
+            "class_name": "unit_price",
+            "confidence": 0.9677685499191284,
+            "extracted_text": [
+                "11.42"
+            ]
+        },
+        {
+            "class_name": "quantity",
+            "confidence": 0.9673334360122681,
+            "extracted_text": [
+                "1"
+            ]
+        },
+        {
+            "class_name": "unit",
+            "confidence": 0.960121214389801,
+            "extracted_text": [
+                "个"
+            ]
+        },
+        {
+            "class_name": "item_name",
+            "confidence": 0.957578718662262,
+            "extracted_text": [
+                "电线电缆:胜为（shengwei）OTG转接头USB2.0转Type-C转换头USB-C车载数据线转换器适用华为耳机",
+                "电线电缆:胜为（shengwei）OTG转接头USB2.0转Type-C转换头USB-C车载数据线转换器适用华为耳机"
+            ]
+        },
+        {
+            "class_name": "tax_amount",
+            "confidence": 0.9566460251808167,
+            "extracted_text": [
+                "1.48",
+                "-0.81",
+                "0.67"
+            ]
+        },
+        {
+            "class_name": "amount",
+            "confidence": 0.9543901085853577,
+            "extracted_text": [
+                "11.42",
+                "-6.20",
+                "5.22"
+            ]
+        },
+        {
+            "class_name": "check_code",
+            "confidence": 0.951568067073822,
+            "extracted_text": [
+                "69142232332892191958"
+            ]
+        },
+        {
+            "class_name": "tax_rate",
+            "confidence": 0.9307140707969666,
+            "extracted_text": [
+                "13%",
+                "13%"
+            ]
+        },
+        {
+            "class_name": "specification",
+            "confidence": 0.9285193681716919,
+            "extracted_text": "EUT0003J"
+        },
+        {
+            "class_name": "invoice_date",
+            "confidence": 0.8986201882362366,
+            "extracted_text": [
+                "2022年01月17日"
+            ]
+        },
+        {
+            "class_name": "seller_tax_id",
+            "confidence": 0.8518476486206055,
+            "extracted_text": [
+                "91370281MA3C2BW83D"
+            ]
+        },
+        {
+            "class_name": "seller_name",
+            "confidence": 0.8485367298126221,
+            "extracted_text": "青岛京东昌益得贸易有限公司"
+        },
+        {
+            "class_name": "total_amount",
+            "confidence": 0.8214419484138489,
+            "extracted_text": [
+                "5.89"
+            ]
+        },
+        {
+            "class_name": "seller_bank_account",
+            "confidence": 0.8035577535629272,
+            "extracted_text": "交通银行股份有限公司青岛崂山支行372005570018000008457"
+        },
+        {
+            "class_name": "invoice_number",
+            "confidence": 0.801828145980835,
+            "extracted_text": [
+                "46604145"
+            ]
+        },
+        {
+            "class_name": "seller_address_phone",
+            "confidence": 0.7220803499221802,
+            "extracted_text": "山东省青岛市胶州市经济技术开发区渭河路17615971309"
+        },
+        {
+            "class_name": "invoice_code",
+            "confidence": 0.6533820629119873,
+            "extracted_text": [
+                "037022100111"
+            ]
+        },
+        {
+            "class_name": "buyer_name",
+            "confidence": 0.6259151697158813,
+            "extracted_text": "个人"
+        },
+        {
+            "class_name": "buyer_tax_id",
+            "confidence": 0.5214152336120605,
+            "extracted_text": null
+        },
+        {
+            "class_name": "buyer_bank_account",
+            "confidence": 0.43753737211227417,
+            "extracted_text": ""
+        },
+        {
+            "class_name": "buyer_address_phone",
+            "confidence": 0.23389805853366852,
+            "extracted_text": ""
+        }
+    ]
+}

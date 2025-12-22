@@ -6,23 +6,31 @@ import os
 from pathlib import Path
 import cv2
 from utils import extract_text_from_bbox, save_to_database
+from utils.image_preprocessor import ImagePreprocessor
 
 
 class InvoiceService:
     """发票识别服务类"""
     
-    def __init__(self, yolo_model, ocr_model):
+    def __init__(self, yolo_model, ocr_model, enable_preprocessing: bool = False):
         """
         初始化服务
         
         Args:
             yolo_model: YOLO 模型实例
             ocr_model: PaddleOCR 模型实例
+            enable_preprocessing: 是否启用图像预处理
         """
         self.yolo_model = yolo_model
         self.ocr_model = ocr_model
+        self.enable_preprocessing = enable_preprocessing
+        if enable_preprocessing:
+            self.preprocessor = ImagePreprocessor(enable_ocr_preprocess=True)
+        else:
+            self.preprocessor = None
     
-    def process_image(self, img_path, save_json=True, save_db=True):
+    def process_image(self, img_path, save_json=True, save_db=True, 
+                     enable_rotation=True, enable_perspective=True, enable_text_correction=True):
         """
         处理单个图像文件
         
@@ -30,6 +38,9 @@ class InvoiceService:
             img_path: 图像文件路径
             save_json: 是否保存 JSON 文件
             save_db: 是否保存到数据库
+            enable_rotation: 是否启用旋转调整
+            enable_perspective: 是否启用透视变换
+            enable_text_correction: 是否启用文字水平调整
             
         Returns:
             dict: 检测结果
@@ -38,9 +49,31 @@ class InvoiceService:
         if not os.path.exists(img_path):
             raise FileNotFoundError(f"图像文件不存在: {img_path}")
         
+        # 读取原始图像
+        original_image = cv2.imread(img_path)
+        if original_image is None:
+            raise ValueError(f"无法读取图像文件: {img_path}")
+        
+        # 图像预处理
+        if self.enable_preprocessing and self.preprocessor:
+            print(f"🔄 开始预处理图像: {img_path}")
+            processed_image = self.preprocessor.preprocess(
+                original_image,
+                enable_rotation=enable_rotation,
+                enable_perspective=enable_perspective,
+                enable_text_correction=enable_text_correction
+            )
+            # 保存预处理后的图像到临时文件，用于YOLO预测
+            temp_path = str(Path(img_path).parent / f"temp_{Path(img_path).name}")
+            cv2.imwrite(temp_path, processed_image)
+            predict_source = temp_path
+        else:
+            processed_image = original_image
+            predict_source = img_path
+        
         # 对图像进行预测
         results = self.yolo_model.predict(
-            source=img_path,
+            source=predict_source,
             save=False,
             show=False,
             conf=0.1,
@@ -48,10 +81,16 @@ class InvoiceService:
             imgsz=640,
         )
         
-        # 读取原始图像用于OCR
-        original_image = cv2.imread(img_path)
-        if original_image is None:
-            raise ValueError(f"无法读取图像文件: {img_path}")
+        # 使用预处理后的图像进行OCR（如果进行了预处理）
+        ocr_image = processed_image if self.enable_preprocessing else original_image
+        
+        # 清理临时文件
+        if self.enable_preprocessing and self.preprocessor and predict_source != img_path:
+            try:
+                if os.path.exists(predict_source):
+                    os.remove(predict_source)
+            except Exception as e:
+                print(f"⚠️ 清理临时文件失败: {e}")
         
         detection_info = {
             "image_name": Path(img_path).stem,
@@ -69,7 +108,7 @@ class InvoiceService:
                     
                     extracted_text = extract_text_from_bbox(
                         self.ocr_model, 
-                        original_image, 
+                        ocr_image, 
                         bbox_coords, 
                         class_name
                     )

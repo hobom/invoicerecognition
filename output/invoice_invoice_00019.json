@@ -1,0 +1,141 @@
+{
+    "image_name": "invoice_invoice_00019",
+    "检测项数": 21,
+    "detections": [
+        {
+            "class_name": "unit_price",
+            "confidence": 0.9844516515731812,
+            "extracted_text": [
+                "147.79646018"
+            ]
+        },
+        {
+            "class_name": "unit",
+            "confidence": 0.9700961709022522,
+            "extracted_text": [
+                "套"
+            ]
+        },
+        {
+            "class_name": "item_name",
+            "confidence": 0.9621685743331909,
+            "extracted_text": [
+                "服装:婧麒（JOYNCLEON）月子服春秋孕妇纯棉哺乳睡衣可哺乳秋薄款睡衣舒适蓝LJyz47149s",
+                "服装:婧麒（JOYNCLEON）月子服春秋孕妇纯棉哺乳睡衣可哺乳秋薄款睡衣舒适蓝LJyz47149s"
+            ]
+        },
+        {
+            "class_name": "tax_amount",
+            "confidence": 0.9599274396896362,
+            "extracted_text": [
+                "19.21",
+                "-3.45",
+                "15.76"
+            ]
+        },
+        {
+            "class_name": "amount",
+            "confidence": 0.9517009258270264,
+            "extracted_text": [
+                "147.80",
+                "-26.57",
+                "121.23"
+            ]
+        },
+        {
+            "class_name": "tax_rate",
+            "confidence": 0.9364399909973145,
+            "extracted_text": [
+                "13%",
+                "13%"
+            ]
+        },
+        {
+            "class_name": "specification",
+            "confidence": 0.9297860860824585,
+            "extracted_text": "Jyz47149"
+        },
+        {
+            "class_name": "check_code",
+            "confidence": 0.9284064173698425,
+            "extracted_text": null
+        },
+        {
+            "class_name": "invoice_date",
+            "confidence": 0.9048886299133301,
+            "extracted_text": [
+                "2024年03月18日"
+            ]
+        },
+        {
+            "class_name": "quantity",
+            "confidence": 0.8968095779418945,
+            "extracted_text": [
+                "1"
+            ]
+        },
+        {
+            "class_name": "seller_tax_id",
+            "confidence": 0.8844210505485535,
+            "extracted_text": [
+                "91371425MA3NY6AC7R"
+            ]
+        },
+        {
+            "class_name": "seller_bank_account",
+            "confidence": 0.8106130361557007,
+            "extracted_text": "中国建设银行股份有限公司齐河支行37050184750100001073"
+        },
+        {
+            "class_name": "total_amount",
+            "confidence": 0.8088531494140625,
+            "extracted_text": [
+                "136.99"
+            ]
+        },
+        {
+            "class_name": "seller_name",
+            "confidence": 0.7987765073776245,
+            "extracted_text": "齐河县京东商贸有限公司"
+        },
+        {
+            "class_name": "invoice_number",
+            "confidence": 0.7935553193092346,
+            "extracted_text": [
+                "65603212"
+            ]
+        },
+        {
+            "class_name": "seller_address_phone",
+            "confidence": 0.716801643371582,
+            "extracted_text": "山东省德州市齐河县经济技术开发区齐众大道与永雅路交汇处17615971309"
+        },
+        {
+            "class_name": "buyer_name",
+            "confidence": 0.6741018295288086,
+            "extracted_text": "个人"
+        },
+        {
+            "class_name": "invoice_code",
+            "confidence": 0.6696102619171143,
+            "extracted_text": [
+                "037002300311"
+            ]
+        },
+        {
+            "class_name": "buyer_bank_account",
+            "confidence": 0.5036658644676208,
+            "extracted_text": ""
+        },
+        {
+            "class_name": "buyer_tax_id",
+            "confidence": 0.44891926646232605,
+            "extracted_text": null
+        },
+        {
+            "class_name": "buyer_address_phone",
+            "confidence": 0.21991775929927826,
+            "extracted_text": ""
+        }
+    ]
+}
