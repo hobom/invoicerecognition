@@ -172,7 +172,7 @@ class InvoiceService:
             # os.remove(file_path)
             pass
     
-    def process_batch(self, file_paths, save_json=True, save_db=True):
+    def process_batch(self, file_paths, save_json=True, save_db=True, progress_callback=None):
         """
         批量处理多个图像文件
         
@@ -180,6 +180,7 @@ class InvoiceService:
             file_paths: 图像文件路径列表
             save_json: 是否保存 JSON 文件
             save_db: 是否保存到数据库
+            progress_callback: 进度回调函数，接收 (current, total, file_path, status) 参数
             
         Returns:
             list: 检测结果列表，每个元素包含 (success, result/error)
@@ -189,6 +190,10 @@ class InvoiceService:
         
         for idx, img_path in enumerate(file_paths, 1):
             try:
+                # 通知进度：开始处理
+                if progress_callback:
+                    progress_callback(idx, total, img_path, 'processing')
+                
                 result = self.process_image(img_path, save_json, save_db)
                 results.append({
                     'success': True,
@@ -197,6 +202,10 @@ class InvoiceService:
                     'index': idx,
                     'total': total
                 })
+                
+                # 通知进度：处理成功
+                if progress_callback:
+                    progress_callback(idx, total, img_path, 'success')
             except Exception as e:
                 results.append({
                     'success': False,
@@ -205,10 +214,14 @@ class InvoiceService:
                     'index': idx,
                     'total': total
                 })
+                
+                # 通知进度：处理失败
+                if progress_callback:
+                    progress_callback(idx, total, img_path, 'failed', str(e))
         
         return results
     
-    def process_folder(self, folder_path, save_json=True, save_db=True):
+    def process_folder(self, folder_path, save_json=True, save_db=True, progress_callback=None):
         """
         处理文件夹中的所有图像文件
         
@@ -216,6 +229,7 @@ class InvoiceService:
             folder_path: 文件夹路径
             save_json: 是否保存 JSON 文件
             save_db: 是否保存到数据库
+            progress_callback: 进度回调函数
             
         Returns:
             list: 检测结果列表
@@ -234,5 +248,5 @@ class InvoiceService:
         if not image_files:
             raise ValueError(f"文件夹中没有找到图像文件: {folder_path}")
         
-        return self.process_batch(image_files, save_json, save_db)
+        return self.process_batch(image_files, save_json, save_db, progress_callback)
 

@@ -83,62 +83,143 @@ form.addEventListener('submit', async (e) => {
     
     const formData = new FormData();
     
-    // 多文件上传
+    // 多文件上传 - 使用流式接口获取进度
     if (selectedFiles.length > 1) {
         selectedFiles.forEach(file => {
             formData.append('files[]', file);
         });
-    } else {
-        // 单文件上传
-        formData.append('file', selectedFiles[0]);
-    }
-    
-    formData.append('save_json', form.save_json.checked);
-    formData.append('save_db', form.save_db.checked);
-    
-    // 显示加载状态
-    loading.classList.add('show');
-    progress.classList.add('show');
-    result.classList.remove('show');
-    error.classList.remove('show');
-    submitBtn.disabled = true;
-    
-    // 更新进度
-    updateProgress(0);
-    
-    try {
-        const response = await fetch('/api/predict', {
-            method: 'POST',
-            body: formData
-        });
         
-        const data = await response.json();
+        formData.append('save_json', form.save_json.checked);
+        formData.append('save_db', form.save_db.checked);
         
-        if (response.ok && data.success) {
-            updateProgress(100);
-            // 判断是批量结果还是单个结果
-            if (data.total !== undefined) {
-                showBatchResult(data);
-            } else {
-                showResult(data.data);
+        // 显示加载状态
+        loading.classList.add('show');
+        progress.classList.add('show');
+        result.classList.remove('show');
+        error.classList.remove('show');
+        submitBtn.disabled = true;
+        
+        // 更新进度
+        updateProgress(0);
+        
+        // 使用流式接口
+        try {
+            const response = await fetch('/api/predict/stream', {
+                method: 'POST',
+                body: formData
+            });
+            
+            if (!response.ok) {
+                throw new Error('请求失败');
             }
-        } else {
-            showError(data.error || '识别失败');
+            
+            const reader = response.body.getReader();
+            const decoder = new TextDecoder();
+            let buffer = '';
+            let finalData = null;
+            
+            while (true) {
+                const { done, value } = await reader.read();
+                if (done) break;
+                
+                buffer += decoder.decode(value, { stream: true });
+                const lines = buffer.split('\n');
+                buffer = lines.pop() || ''; // 保留最后一个不完整的行
+                
+                for (const line of lines) {
+                    if (line.startsWith('data: ')) {
+                        try {
+                            const data = JSON.parse(line.slice(6));
+                            
+                            if (data.type === 'start') {
+                                updateProgress(0);
+                            } else if (data.type === 'progress') {
+                                updateProgress(data.percent);
+                                // 可选：显示当前处理的文件
+                                if (data.file) {
+                                    progressText.textContent = `${data.percent}% - 正在处理: ${data.file}`;
+                                }
+                            } else if (data.type === 'complete') {
+                                updateProgress(100);
+                                finalData = data;
+                                showBatchResult({
+                                    success: true,
+                                    total: data.total,
+                                    success_count: data.success_count,
+                                    failed_count: data.failed_count,
+                                    data: data.data
+                                });
+                            } else if (data.type === 'error') {
+                                showError(data.message || '处理失败');
+                                break;
+                            }
+                        } catch (e) {
+                            console.error('解析进度数据失败:', e);
+                        }
+                    }
+                }
+            }
+            
+            if (!finalData) {
+                showError('处理未完成');
+            }
+        } catch (err) {
+            showError('网络错误: ' + err.message);
+        } finally {
+            loading.classList.remove('show');
+            progress.classList.remove('show');
+            submitBtn.disabled = false;
+            progressText.textContent = '0%';
         }
-    } catch (err) {
-        showError('网络错误: ' + err.message);
-    } finally {
-        loading.classList.remove('show');
-        progress.classList.remove('show');
-        submitBtn.disabled = false;
+    } else {
+        // 单文件上传 - 使用普通接口
+        formData.append('file', selectedFiles[0]);
+        formData.append('save_json', form.save_json.checked);
+        formData.append('save_db', form.save_db.checked);
+        
+        // 显示加载状态
+        loading.classList.add('show');
+        progress.classList.add('show');
+        result.classList.remove('show');
+        error.classList.remove('show');
+        submitBtn.disabled = true;
+        
+        // 更新进度
+        updateProgress(0);
+        
+        try {
+            const response = await fetch('/api/predict', {
+                method: 'POST',
+                body: formData
+            });
+            
+            const data = await response.json();
+            
+            if (response.ok && data.success) {
+                updateProgress(100);
+                showResult(data.data);
+            } else {
+                showError(data.error || '识别失败');
+            }
+        } catch (err) {
+            showError('网络错误: ' + err.message);
+        } finally {
+            loading.classList.remove('show');
+            progress.classList.remove('show');
+            submitBtn.disabled = false;
+        }
     }
 });
 
 // 更新进度条
 function updateProgress(percent) {
-    progressText.textContent = `${percent}%`;
-    progressFill.style.width = `${percent}%`;
-    progressFill.textContent = `${percent}%`;
+    const percentValue = Math.min(100, Math.max(0, percent));
+    progressFill.style.width = `${percentValue}%`;
+    progressFill.textContent = `${percentValue}%`;
+    // 如果progressText没有显示文件名，则更新百分比
+    if (!progressText.textContent.includes('正在处理:')) {
+        progressText.textContent = `${percentValue}%`;
+    }
 }
 
 // 显示单个结果
