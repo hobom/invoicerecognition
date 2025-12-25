@@ -1,6 +1,6 @@
 import re
 from db import SessionLocal
-from model import Invoice, Detection
+from model import Invoice
 
 
 # 类别名称到中文名称的映射
@@ -100,18 +100,32 @@ def extract_values(text_list, class_name):
             for num in numbers:
                 if len(num) == 20 or len(num) == 8 or len(num) == 12:
                     result.append(num)
-        return result
+        return "".join(result)
     elif "invoice_date" == class_name:
-        # 正则表达式匹配 xxxx年xx月xx日 格式
-        pattern = r'\d{4}年\d{1,2}月\d{1,2}日'
+        """
+        提取日期并转换为MySQL标准格式 (YYYY-MM-DD)
+        支持多种日期格式：
+        - 2024年1月1日
+        - 2024/1/1
+        - 2024-1-1
+        - 2024.1.1
+        """
         result = []
+        
         for text in text_list:
-            # 查找所有匹配的日期
-            matches = re.findall(pattern, text)
-            # 将匹配到的日期添加到结果中
+            # 格式1: xxxx年xx月xx日
+            pattern1 = r'(\d{4})年(\d{1,2})月(\d{1,2})日'
+            matches = re.findall(pattern1, text)
             for match in matches:
-                result.append(match)
-        return result
+                year, month, day = match
+                month = month.zfill(2)
+                day = day.zfill(2)
+                mysql_date = f"{year}-{month}-{day}"
+                result.append(mysql_date)
+        if result:
+            # 返回第一个匹配的日期
+            return result[0]
+        return None
     elif class_name in ["seller_name", "buyer_name", "seller_bank_account", "buyer_bank_account", "seller_address_phone", "buyer_address_phone"]:
         res = []
         find = False
@@ -132,18 +146,30 @@ def extract_values(text_list, class_name):
         for text in text_list:
             # 匹配连续的数字，包括可能存在的小数点
             numbers = re.findall(r'(?:-)?\d+(?:\.\d+)?(?:%)?', text)
-            # 移除空字符串并添加到结果中
-            for num in numbers:
-                if num:  # 确保不是空字符串
-                    result.append(num)
-        return result
+            # 转换为数字类型
+            for num_str in numbers:
+                if num_str:  # 确保不是空字符串
+                    try:
+                        # 移除百分号并转换为浮点数
+                        num_value = float(num_str.replace('%', ''))
+                        result.append(num_value)
+                    except (ValueError, TypeError):
+                        # 如果转换失败，保持为字符串
+                        result.append(num_str)
+        
+        if class_name == "total_amount":
+            # total_amount 作为字符串返回（可能包含多个数字连接）
+            return "".join(str(r) for r in result) if result else None
+        else:
+            # 其他数字字段返回数字列表
+            return result if result else None
     elif class_name in ["seller_tax_id", "buyer_tax_id"]:
         # 正则表达式模式：匹配连续18个字母或数字
         pattern = r'[a-zA-Z0-9]{18}'
         for text in text_list:
             matches = re.findall(pattern, text)
             if len(matches) > 0:
-                return matches
+                return matches[0]
         return None
     elif class_name in ["unit"]:
         res = []
@@ -196,9 +222,140 @@ def extract_text_from_bbox(ocr, image, bbox, class_name):
         return None
 
 
+def clean_string(value):
+    """
+    清理字符串，移除双引号和其他不必要的字符
+    
+    Args:
+        value: 原始字符串
+        
+    Returns:
+        清理后的字符串
+    """
+    if not isinstance(value, str):
+        return value
+    
+    # 移除各种类型的双引号
+    value = value.replace('"', '')  # 英文双引号
+    value = value.replace('"', '')  # 左双引号
+    value = value.replace('"', '')  # 右双引号
+    value = value.replace('"', '')  # 全角左双引号
+    value = value.replace('"', '')  # 全角右双引号
+    
+    # 移除其他可能不需要的字符（可选）
+    # value = value.replace("'", '')  # 单引号（根据需要决定是否移除）
+    
+    return value.strip()
+
+
+def normalize_field_value(class_name, value):
+    """
+    规范化字段值，确保数据类型正确，符合MySQL JSON字段存储要求
+    
+    字段类型规范：
+    - 日期字段 (invoice_date): 字符串 "YYYY-MM-DD"
+    - 字符串字段: 字符串类型
+    - 数字字段: 数字或数字列表（浮点数）
+    - 列表字段: 字符串列表
+    
+    Args:
+        class_name: 字段名称
+        value: 原始值
+        
+    Returns:
+        规范化后的值（适合JSON存储）
+    """
+    if value is None:
+        return None
+    
+    # 日期字段：确保是字符串格式 "YYYY-MM-DD"
+    if class_name == "invoice_date":
+        if isinstance(value, str):
+            # 清理字符串（移除双引号等）
+            value = clean_string(value)
+            # 验证日期格式
+            if re.match(r'^\d{4}-\d{2}-\d{2}$', value):
+                return value
+            else:
+                # 如果不是标准格式，尝试解析并转换
+                # 这里假设extract_values已经转换好了
+                return value
+        return None
+    
+    # 字符串字段：确保是字符串类型，并清理双引号
+    string_fields = [
+        "invoice_code", "invoice_number", "check_code",
+        "seller_name", "buyer_name", 
+        "seller_bank_account", "buyer_bank_account",
+        "seller_address_phone", "buyer_address_phone",
+        "specification", "seller_tax_id", "buyer_tax_id",
+        "total_amount"  # total_amount 作为字符串存储（可能包含多个数字）
+    ]
+    if class_name in string_fields:
+        if isinstance(value, str):
+            cleaned = clean_string(value)
+            return cleaned if cleaned else None
+        elif isinstance(value, list):
+            # 如果是列表，转换为字符串（用空格连接），并清理每个元素
+            cleaned_items = [clean_string(str(v)) for v in value if v]
+            joined = " ".join(cleaned_items)
+            return joined if joined else None
+        else:
+            cleaned = clean_string(str(value))
+            return cleaned if cleaned else None
+    
+    # 数字字段：转换为数字或数字列表（浮点数）
+    numeric_fields = ["unit_price", "tax_amount", "tax_rate", "amount", "quantity"]
+    if class_name in numeric_fields:
+        if isinstance(value, list):
+            # 列表中的每个元素转换为数字
+            result = []
+            for item in value:
+                try:
+                    # 如果已经是数字，直接使用
+                    if isinstance(item, (int, float)):
+                        result.append(float(item))
+                    else:
+                        # 移除可能的百分号和其他字符
+                        item_str = str(item).replace('%', '').strip()
+                        num = float(item_str)
+                        result.append(num)
+                except (ValueError, TypeError):
+                    continue
+            return result if result else None
+        elif isinstance(value, str):
+            # 字符串转换为数字
+            try:
+                value_clean = value.replace('%', '').strip()
+                return float(value_clean)
+            except (ValueError, TypeError):
+                return None
+        elif isinstance(value, (int, float)):
+            return float(value)
+        return None
+    
+    # 列表字段：确保是字符串列表，并清理双引号
+    list_fields = ["item_name", "unit"]
+    if class_name in list_fields:
+        if isinstance(value, list):
+            # 确保列表中的元素都是非空字符串，并清理双引号
+            result = [clean_string(str(v)) for v in value if v and str(v).strip()]
+            return result if result else None
+        elif isinstance(value, str):
+            # 字符串转换为列表，并清理双引号
+            cleaned = clean_string(value)
+            return [cleaned] if cleaned else None
+        return None
+    
+    # 默认情况：保持原值
+    return value
+
+
 def save_to_database(detection_info):
     """
     将检测结果保存到数据库
+    
+    新的表结构：每个发票一行记录，包含所有字段的值
     
     Args:
         detection_info: 包含检测结果的字典
@@ -211,11 +368,7 @@ def save_to_database(detection_info):
         ).first()
         
         if existing_invoice:
-            # 如果已存在，先删除旧的检测项
-            db.query(Detection).filter(
-                Detection.invoice_id == existing_invoice.id
-            ).delete()
-            # 更新发票信息
+            # 如果已存在，更新发票信息
             existing_invoice.detection_count = detection_info['检测项数']
             invoice = existing_invoice
             print(f"更新数据库记录: {detection_info['image_name']}")
@@ -229,28 +382,20 @@ def save_to_database(detection_info):
             db.flush()  # 获取 invoice.id
             print(f"创建新数据库记录: {detection_info['image_name']}")
         
-        # 保存检测项
+        # 遍历所有检测项，将数据填充到对应的字段列
         for detection_data in detection_info['detections']:
-            # 处理 extracted_text：确保它是列表或字符串，不能是 None
-            extracted_text = detection_data['extracted_text']
-            if extracted_text is None:
-                extracted_text = []  # 如果为 None，保存为空列表
-            elif isinstance(extracted_text, str):
-                extracted_text = [extracted_text]  # 如果是字符串，转换为列表
-            # 如果已经是列表，保持不变
-            
-            # 获取类别名称的中文名称
             class_name = detection_data['class_name']
-            class_name_cn = get_class_name_cn(class_name)
+            extracted_text = detection_data['extracted_text']
             
-            detection = Detection(
-                invoice_id=invoice.id,
-                class_name=class_name,
-                class_name_cn=class_name_cn,
-                confidence=detection_data['confidence'],
-                extracted_text=extracted_text
-            )
-            db.add(detection)
+            # 规范化字段值，确保数据类型正确
+            normalized_value = normalize_field_value(class_name, extracted_text)
+            
+            # 根据class_name将规范化后的值填充到对应的列
+            if hasattr(invoice, class_name):
+                setattr(invoice, class_name, normalized_value)
+            else:
+                # 如果字段不存在，打印警告（不应该发生）
+                print(f"⚠️  警告: Invoice表中不存在字段 '{class_name}'")
         
         # 提交事务
         db.commit()

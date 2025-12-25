@@ -44,8 +44,8 @@ def check_and_init_db():
     inspector = inspect(engine)
     existing_tables = inspector.get_table_names()
     
-    # 检查必要的表是否存在
-    required_tables = ['invoices', 'detections']
+    # 检查必要的表是否存在（现在只有一个invoices表）
+    required_tables = ['invoices']
     missing_tables = [table for table in required_tables if table not in existing_tables]
     
     if missing_tables:

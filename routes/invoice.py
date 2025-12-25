@@ -3,7 +3,7 @@
 """
 from flask import Blueprint, request, jsonify
 from db import SessionLocal
-from model import Invoice, Detection
+from model import Invoice
 
 invoice_bp = Blueprint('invoice', __name__, url_prefix='/api/invoices')
 
@@ -55,9 +55,27 @@ def get_invoice_detail(invoice_id):
         if not invoice:
             return jsonify({'error': '发票不存在'}), 404
         
-        detections = db.query(Detection).filter(
-            Detection.invoice_id == invoice_id
-        ).all()
+        # 将Invoice记录的所有字段转换为detections数组格式（保持API兼容性）
+        detections_list = []
+        # 定义所有字段名称（与CLASS_NAME_CN_MAP保持一致）
+        field_names = [
+            'quantity', 'unit_price', 'unit', 'item_name', 'check_code',
+            'tax_amount', 'amount', 'tax_rate', 'specification',
+            'invoice_number', 'invoice_code', 'invoice_date',
+            'seller_name', 'buyer_name', 'seller_tax_id', 'buyer_tax_id',
+            'seller_bank_account', 'buyer_bank_account',
+            'seller_address_phone', 'buyer_address_phone',
+            'total_amount'
+        ]
+        
+        # 遍历所有字段，将非None的字段添加到detections列表
+        for field_name in field_names:
+            field_value = getattr(invoice, field_name, None)
+            if field_value is not None:
+                detections_list.append({
+                    'class_name': field_name,
+                    'extracted_text': field_value
+                })
         
         return jsonify({
             'success': True,
@@ -67,12 +85,7 @@ def get_invoice_detail(invoice_id):
                 'detection_count': invoice.detection_count,
                 'created_at': invoice.created_at.isoformat() if invoice.created_at else None,
                 'updated_at': invoice.updated_at.isoformat() if invoice.updated_at else None,
-                'detections': [{
-                    'id': det.id,
-                    'class_name': det.class_name,
-                    'confidence': det.confidence,
-                    'extracted_text': det.extracted_text
-                } for det in detections]
+                'detections': detections_list
             }
         }), 200
     except Exception as e:
