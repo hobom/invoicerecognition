@@ -104,11 +104,6 @@ def extract_values(text_list, class_name):
     elif "invoice_date" == class_name:
         """
         提取日期并转换为MySQL标准格式 (YYYY-MM-DD)
-        支持多种日期格式：
-        - 2024年1月1日
-        - 2024/1/1
-        - 2024-1-1
-        - 2024.1.1
         """
         result = []
         
@@ -157,11 +152,9 @@ def extract_values(text_list, class_name):
                         # 如果转换失败，保持为字符串
                         result.append(num_str)
         
-        if class_name == "total_amount":
-            # total_amount 作为字符串返回（可能包含多个数字连接）
-            return "".join(str(r) for r in result) if result else None
+        if class_name == ["total_amount", "amount", "tax_amount"]:
+            return result[-1] if result else None
         else:
-            # 其他数字字段返回数字列表
             return result if result else None
     elif class_name in ["seller_tax_id", "buyer_tax_id"]:
         # 正则表达式模式：匹配连续18个字母或数字
@@ -222,32 +215,6 @@ def extract_text_from_bbox(ocr, image, bbox, class_name):
         return None
 
 
-def clean_string(value):
-    """
-    清理字符串，移除双引号和其他不必要的字符
-    
-    Args:
-        value: 原始字符串
-        
-    Returns:
-        清理后的字符串
-    """
-    if not isinstance(value, str):
-        return value
-    
-    # 移除各种类型的双引号
-    value = value.replace('"', '')  # 英文双引号
-    value = value.replace('"', '')  # 左双引号
-    value = value.replace('"', '')  # 右双引号
-    value = value.replace('"', '')  # 全角左双引号
-    value = value.replace('"', '')  # 全角右双引号
-    
-    # 移除其他可能不需要的字符（可选）
-    # value = value.replace("'", '')  # 单引号（根据需要决定是否移除）
-    
-    return value.strip()
-
-
 def normalize_field_value(class_name, value):
     """
     规范化字段值，确保数据类型正确，符合MySQL JSON字段存储要求
@@ -271,8 +238,6 @@ def normalize_field_value(class_name, value):
     # 日期字段：确保是字符串格式 "YYYY-MM-DD"
     if class_name == "invoice_date":
         if isinstance(value, str):
-            # 清理字符串（移除双引号等）
-            value = clean_string(value)
             # 验证日期格式
             if re.match(r'^\d{4}-\d{2}-\d{2}$', value):
                 return value
@@ -282,7 +247,7 @@ def normalize_field_value(class_name, value):
                 return value
         return None
     
-    # 字符串字段：确保是字符串类型，并清理双引号
+    # 字符串字段：确保是字符串类型
     string_fields = [
         "invoice_code", "invoice_number", "check_code",
         "seller_name", "buyer_name", 
@@ -293,16 +258,13 @@ def normalize_field_value(class_name, value):
     ]
     if class_name in string_fields:
         if isinstance(value, str):
-            cleaned = clean_string(value)
-            return cleaned if cleaned else None
+            return value.strip() if value.strip() else None
         elif isinstance(value, list):
-            # 如果是列表，转换为字符串（用空格连接），并清理每个元素
-            cleaned_items = [clean_string(str(v)) for v in value if v]
-            joined = " ".join(cleaned_items)
-            return joined if joined else None
+            # 如果是列表，转换为字符串（用空格连接）
+            joined = " ".join(str(v) for v in value if v)
+            return joined.strip() if joined.strip() else None
         else:
-            cleaned = clean_string(str(value))
-            return cleaned if cleaned else None
+            return str(value).strip() if value else None
     
     # 数字字段：转换为数字或数字列表（浮点数）
     numeric_fields = ["unit_price", "tax_amount", "tax_rate", "amount", "quantity"]
@@ -334,17 +296,16 @@ def normalize_field_value(class_name, value):
             return float(value)
         return None
     
-    # 列表字段：确保是字符串列表，并清理双引号
+    # 列表字段：确保是字符串列表
     list_fields = ["item_name", "unit"]
     if class_name in list_fields:
         if isinstance(value, list):
-            # 确保列表中的元素都是非空字符串，并清理双引号
-            result = [clean_string(str(v)) for v in value if v and str(v).strip()]
+            # 确保列表中的元素都是非空字符串
+            result = [str(v).strip() for v in value if v and str(v).strip()]
             return result if result else None
         elif isinstance(value, str):
-            # 字符串转换为列表，并清理双引号
-            cleaned = clean_string(value)
-            return [cleaned] if cleaned else None
+            # 字符串转换为列表
+            return [value.strip()] if value.strip() else None
         return None
     
     # 默认情况：保持原值
