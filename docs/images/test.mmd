@@ -1,0 +1,12 @@
+flowchart TB
+    R[识别结果] --> E[参数提取<br>LLM 或规则匹配]
+    E --> P[发票号码 / 开票日期 / 金额]
+    P --> POST[POST 核验 API]
+    POST --> RES[JSON 响应]
+    RES --> PARSE[解析]
+    PARSE --> TRUE[真]
+    PARSE --> FALSE[假]
+    PARSE --> DETAIL[详情/错误]
+    TRUE --> SHOW[关联展示]
+    FALSE --> SHOW
+    DETAIL --> SHOW
