@@ -10,6 +10,7 @@ from services.invoice_service import InvoiceService
 from routes.api import init_api_routes
 from routes.invoice import invoice_bp
 from routes.web import web_bp
+from routes.sql import sql_bp
 from config import Config
 
 
@@ -31,6 +32,7 @@ def create_app():
     # 注册蓝图
     app.register_blueprint(web_bp)
     app.register_blueprint(invoice_bp)
+    app.register_blueprint(sql_bp)  # SQL执行和发票核验路由
     
     # 初始化 API 路由（需要传入服务实例）
     api_bp = init_api_routes(invoice_service, app.config['ALLOWED_EXTENSIONS'])

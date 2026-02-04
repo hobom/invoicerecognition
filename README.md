@@ -40,6 +40,9 @@ DB_PORT=3306
 DB_USER=root
 DB_PASSWORD=your_password
 DB_NAME=invoice_recognition
+
+# 阿里云发票核验API配置（可选）
+ALIYUN_APPCODE=your_appcode_here
 ```
 
 ### 4. 准备模型文件
@@ -63,14 +66,18 @@ invoicerecognition/
 ├── db.py                 # 数据库连接
 ├── model.py              # 数据模型
 ├── routes/               # 路由
-│   ├── api.py           # API 路由
+│   ├── api.py           # API 路由（发票识别）
 │   ├── invoice.py       # 发票查询路由
+│   ├── sql.py           # SQL执行和发票核验路由
 │   └── web.py           # Web 页面路由
 ├── services/             # 服务层
 │   ├── model_loader.py  # 模型加载
-│   └── invoice_service.py # 发票识别服务
+│   ├── invoice_service.py # 发票识别服务
+│   ├── sql_service.py   # SQL执行服务
+│   └── invoice_check_service.py # 发票核验服务
 ├── utils/                # 工具函数
-│   └── utils.py
+│   ├── utils.py         # 通用工具
+│   └── dify_tools.py    # Dify工作流工具函数
 ├── templates/            # 模板文件
 │   └── index.html
 ├── static/               # 静态资源
@@ -89,11 +96,55 @@ invoicerecognition/
 - 多文件上传: `files[]` 字段
 - JSON 请求: `image_path` 或 `image_paths` 或 `folder_path`
 
+**POST** `/api/predict/stream` - 发票识别（支持进度更新，SSE流式响应）
+
 ### 查询发票
 
 **GET** `/api/invoices` - 获取发票列表
 
 **GET** `/api/invoices/<id>` - 获取发票详情
+
+### SQL执行
+
+**POST** `/api/execute`
+
+执行SQL查询，支持SELECT和DML操作。
+
+请求体（JSON）:
+```json
+{
+  "sql": "SELECT * FROM invoices LIMIT 10"
+}
+```
+
+返回:
+```json
+{
+  "success": true,
+  "type": "select",
+  "data": [...],
+  "count": 10
+}
+```
+
+### 发票核验
+
+**POST** `/api/check`
+
+核验发票真伪（调用阿里云发票核验API）。
+
+请求体（JSON或form-data）:
+```json
+{
+  "fphm": "发票号码",
+  "kprq": "2024-01-01",
+  "jshj": "1000.00"
+}
+```
+
+**POST** `/api/check/<invoice_id>`
+
+根据发票ID核验发票（从数据库读取发票信息后核验）。
 
 ## 使用示例
 
@@ -119,6 +170,16 @@ curl -X POST http://localhost:5000/api/predict \
 curl -X POST http://localhost:5000/api/predict \
   -F "files[]=@invoice1.jpg" \
   -F "files[]=@invoice2.jpg"
+
+# SQL执行
+curl -X POST http://localhost:5000/api/execute \
+  -H "Content-Type: application/json" \
+  -d '{"sql": "SELECT * FROM invoices LIMIT 10"}'
+
+# 发票核验
+curl -X POST http://localhost:5000/api/check \
+  -H "Content-Type: application/json" \
+  -d '{"fphm": "发票号码", "kprq": "2024-01-01", "jshj": "1000.00"}'
 ```
 
 ## 识别字段

@@ -152,7 +152,7 @@ def extract_values(text_list, class_name):
                         # 如果转换失败，保持为字符串
                         result.append(num_str)
         
-        if class_name == ["total_amount", "amount", "tax_amount"]:
+        if class_name in ["total_amount", "amount", "tax_amount"]:
             return result[-1] if result else None
         else:
             return result if result else None
@@ -218,23 +218,23 @@ def extract_text_from_bbox(ocr, image, bbox, class_name):
 def normalize_field_value(class_name, value):
     """
     规范化字段值，确保数据类型正确，符合MySQL JSON字段存储要求
-    
+
     字段类型规范：
     - 日期字段 (invoice_date): 字符串 "YYYY-MM-DD"
     - 字符串字段: 字符串类型
     - 数字字段: 数字或数字列表（浮点数）
     - 列表字段: 字符串列表
-    
+
     Args:
         class_name: 字段名称
         value: 原始值
-        
+
     Returns:
         规范化后的值（适合JSON存储）
     """
     if value is None:
         return None
-    
+
     # 日期字段：确保是字符串格式 "YYYY-MM-DD"
     if class_name == "invoice_date":
         if isinstance(value, str):
@@ -246,15 +246,14 @@ def normalize_field_value(class_name, value):
                 # 这里假设extract_values已经转换好了
                 return value
         return None
-    
+
     # 字符串字段：确保是字符串类型
     string_fields = [
         "invoice_code", "invoice_number", "check_code",
-        "seller_name", "buyer_name", 
+        "seller_name", "buyer_name",
         "seller_bank_account", "buyer_bank_account",
         "seller_address_phone", "buyer_address_phone",
         "specification", "seller_tax_id", "buyer_tax_id",
-        "total_amount"  # total_amount 作为字符串存储（可能包含多个数字）
     ]
     if class_name in string_fields:
         if isinstance(value, str):
@@ -265,9 +264,9 @@ def normalize_field_value(class_name, value):
             return joined.strip() if joined.strip() else None
         else:
             return str(value).strip() if value else None
-    
+
     # 数字字段：转换为数字或数字列表（浮点数）
-    numeric_fields = ["unit_price", "tax_amount", "tax_rate", "amount", "quantity"]
+    numeric_fields = ["unit_price", "tax_amount", "tax_rate", "amount", "quantity", "total_amount"]
     if class_name in numeric_fields:
         if isinstance(value, list):
             # 列表中的每个元素转换为数字
@@ -295,7 +294,7 @@ def normalize_field_value(class_name, value):
         elif isinstance(value, (int, float)):
             return float(value)
         return None
-    
+
     # 列表字段：确保是字符串列表
     list_fields = ["item_name", "unit"]
     if class_name in list_fields:
@@ -307,7 +306,7 @@ def normalize_field_value(class_name, value):
             # 字符串转换为列表
             return [value.strip()] if value.strip() else None
         return None
-    
+
     # 默认情况：保持原值
     return value
 
